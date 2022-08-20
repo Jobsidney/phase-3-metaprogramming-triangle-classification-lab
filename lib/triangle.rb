@@ -1,31 +1,39 @@
 class Triangle
   # write code here
-  attr_accessor :side1, :side2, :side3
+  attr_accessor :side1, :side2, :side3,:sideArr
   def initialize(side1,side2,side3)
     @side1 = side1
     @side2 = side2
     @side3 = side3
+    @sideArr=[@side1,@side2,@side3]
   end
 
   def kind
-    if side1 >0 && side2 >0 && side3 >0
-      if side1==side2 && side3==side1
-        ":equilateral"    
-       elsif side1==side2 || side1==side3 || side2==side3
-        ":isosceles"
-       elsif side1 !=side2 || side2 !=side3
-        ":scalene"
-       end
-    else
-      begin
-        raise TriangleError
-      rescue => error
-        error.message
-      end
-      
+    measurement=[side1, side2, side3]
+  zeroCheck=sideArr.find{|num| num<=0} ? true : false
+  sides=measurement.uniq.size
+  allzero=measurement.all? ==0 ? true : false
+  p negCheck=measurement.find{|num| num<0 } ? true : false
+  
+  case
+  when sides==1 && !zeroCheck && !negCheck  then :equilateral
+    
+  when sides==2 && !zeroCheck && !negCheck then :isosceles
+  when sides==3 && !zeroCheck && !negCheck then :scalene    
+  else
+    begin
+      !zeroCheck
+      !negCheck
+      raise TriangleError
+    rescue => error
+      error.message
     end
+    
+  end
+end
 
-   end
+  
+  
 
    class TriangleError < StandardError
     def message
@@ -36,7 +44,7 @@ class Triangle
 end
 
 
-iso=Triangle.new(1,0,5)
+iso=Triangle.new(1,1,2)
 p iso.kind
 
 
