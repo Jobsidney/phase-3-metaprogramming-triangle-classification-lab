@@ -16,10 +16,10 @@ class Triangle
   p negCheck=measurement.find{|num| num<0 } ? true : false
   
   case
-  when sides==1 && !zeroCheck && !negCheck  then :equilateral
+  when sides==1 && !zeroCheck  then :equilateral
     
-  when sides==2 && !zeroCheck && !negCheck then :isosceles
-  when sides==3 && !zeroCheck && !negCheck then :scalene    
+  when sides==2 && !zeroCheck  then :isosceles
+  when sides==3 && !zeroCheck  then :scalene    
   else
     begin
       !zeroCheck
